@@ -1,14 +1,8 @@
 package com.visu.snmp;
 
-import com.visu.snmp.receiver.SnmpReceiverThread;
-import com.visu.snmp.sender.SnmpSenderThread;
+public interface SnmpService {
 
-public class SnmpService {
-    public static void main(String[] args) {
-        SnmpSenderThread senderThread = new SnmpSenderThread();
-        SnmpReceiverThread receiverThread = new SnmpReceiverThread();
+    void sendMessage(String ipAddress, int port);
 
-        receiverThread.start();
-        senderThread.start();
-    }
+    void listen(String idAddress, int port);
 }

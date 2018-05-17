@@ -16,7 +16,9 @@ import java.util.Date;
 
 public class SnmpSender {
 
-    public void sendSnmpTrap(String ipAddress, int port) {
+    private final Snmp snmp;
+
+    public SnmpSender() {
         TransportMapping transport;
 
         try {
@@ -26,12 +28,14 @@ public class SnmpSender {
             throw new RuntimeException("Exception while creating transport", ex);
         }
 
+        snmp = new Snmp(transport);
+    }
+
+    public void sendSnmpTrap(String ipAddress, int port) {
         CommunityTarget cTarget = new CommunityTarget();
         cTarget.setCommunity(new OctetString("public"));
         cTarget.setVersion(SnmpConstants.version2c);
         cTarget.setAddress(new UdpAddress(ipAddress + "/" + port));
-
-        Snmp snmp = new Snmp(transport);
 
         PDU pdu = new PDU();
 
