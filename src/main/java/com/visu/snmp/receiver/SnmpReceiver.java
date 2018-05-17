@@ -1,4 +1,5 @@
 package com.visu.snmp.receiver;
+
 import com.visu.snmp.receiver.listener.SnmpTrapListener;
 import org.snmp4j.CommandResponder;
 import org.snmp4j.CommunityTarget;
