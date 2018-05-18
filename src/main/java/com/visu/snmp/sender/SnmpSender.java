@@ -17,8 +17,9 @@ import java.util.Date;
 public class SnmpSender {
 
     private final Snmp snmp;
+    private final CommunityTarget cTarget;
 
-    public SnmpSender() {
+    public SnmpSender(String ipAddress, int port) {
         TransportMapping transport;
 
         try {
@@ -29,14 +30,14 @@ public class SnmpSender {
         }
 
         snmp = new Snmp(transport);
-    }
 
-    public void sendSnmpTrap(String ipAddress, int port) {
-        CommunityTarget cTarget = new CommunityTarget();
+        cTarget = new CommunityTarget();
         cTarget.setCommunity(new OctetString("public"));
         cTarget.setVersion(SnmpConstants.version2c);
         cTarget.setAddress(new UdpAddress(ipAddress + "/" + port));
+    }
 
+    public void sendSnmpTrap() {
         PDU pdu = new PDU();
 
         pdu.add(new VariableBinding(SnmpConstants.sysUpTime, new OctetString(new Date().toString())));

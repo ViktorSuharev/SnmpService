@@ -10,14 +10,9 @@ import org.snmp4j.transport.DefaultUdpTransportMapping;
 
 public class SnmpReceiver {
 
-    private final String ipAddress;
-    private final int port;
     private final Snmp snmp;
 
     public SnmpReceiver(String ipAddress, int port) {
-        this.ipAddress = ipAddress;
-        this.port = port;
-
         AbstractTransportMapping transport = null;
         try {
             TransportIpAddress address = new UdpAddress(ipAddress + "/" + port);
